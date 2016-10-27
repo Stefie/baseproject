@@ -1,15 +1,19 @@
 # Starter-Kit
 
 CSS Compiler:
+
 http://stylus-lang.com/
 
 HTML Compiler:
+
 https://pugjs.org/ (formerly JADE)
 
 Aframe-ready:
+
 https://aframe.io/docs/
 
 Dev Dependencies:
+
 "browser-sync": "^2.17.5", (https://www.npmjs.com/package/browser-sync)
 "del": "^2.2.2", (https://www.npmjs.com/package/del)
 "gulp": "^3.9.1", (https://www.npmjs.com/package/gulp)
