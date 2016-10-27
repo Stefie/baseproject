@@ -14,7 +14,7 @@ rootJS = './app/js/',
 rootStyles = './app/styles/',
 rootAssets = './app/assets/',
 rootPages = './app/patterns/04-pages/',
-rootPublic = './public/';
+rootPublic = './docs/';
 
 // Compile CSS with stylus
 gulp.task('compile:styl', function() {
@@ -40,7 +40,7 @@ gulp.task('compile:styl', function() {
 gulp.task('compile:pug', function buildHTML() {
 	return gulp.src(rootPages + '*.pug')
 	.pipe(pug({basedir: __dirname + '/app'}))
-	.pipe(gulp.dest('./public'))
+	.pipe(gulp.dest(rootPublic))
 	.pipe(browserSync.reload({
 		stream: true
 	}));
@@ -53,12 +53,12 @@ gulp.task('compile:js', function() {
 		rootJS + 'aframe/kframe.min.js',
 		rootJS + 'fonts/*.typeface.js'
 		])
-		.pipe(gulp.dest('public/js'));
+		.pipe(gulp.dest(rootPublic + 'js'));
 	var appjs = gulp.src([
 		rootJS + 'plugins/*.js',
 		rootJS + 'app.js'
 		])
-		.pipe(gulp.dest('public/js'));
+		.pipe(gulp.dest(rootPublic + 'js'));
 	return (aframe, appjs);
 });
 
@@ -76,7 +76,7 @@ gulp.task('compile:assets', function () {
 		svgo: false,
 		concurrent: 10
 	}))
-	.pipe(gulp.dest('public'));
+	.pipe(gulp.dest(rootPublic));
 });
 
 // Watch task
@@ -90,17 +90,8 @@ gulp.task('app:watch', ['app:browserSync', 'compile:styl'], function() {
 gulp.task('app:browserSync', function() {
 	browserSync.init({
 		server: {
-			baseDir: 'public',
+			baseDir: 'docs',
 			index: "index.html"
 		},
 	})
 })
-
-// cleanup
-gulp.task('clean:public', function() {
-	return del.sync('public');
-})
-
-
-// Default gulp task to run
-gulp.task('default', ['clean:public', 'compile:styl', 'compile:pug', 'compile:js', 'compile:assets', 'app:watch', 'app:browserSync']);
