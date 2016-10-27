@@ -1,0 +1,26 @@
+doctype html
+html(lang="en")
+	head
+		title #{title}
+		meta(charset="utf-8")
+		meta(name="description", content="Starterkit")
+
+		block styles
+			link(href="./css/app.css", rel="stylesheet")
+
+		block scripts
+			script(src="./js/aframe.min.js")
+			script(src="./js/kframe.min.js")
+
+		body
+
+			block fullScreenHead
+
+			block content
+
+			block footer
+				include includes/footer.pug
+
+			block footerScripts
+
+			script(src='./js/app.js')
