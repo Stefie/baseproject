@@ -51,6 +51,7 @@ gulp.task('compile:js', function() {
 	var aframe = gulp.src([
 		rootJS + 'aframe/aframe.min.js',
 		rootJS + 'aframe/kframe.min.js',
+		rootJS + 'aframe/aframe-cubemap-component.js',
 		rootJS + 'fonts/*.typeface.js'
 		])
 		.pipe(gulp.dest(rootPublic + 'js'));
@@ -90,8 +91,17 @@ gulp.task('app:watch', ['app:browserSync', 'compile:styl'], function() {
 gulp.task('app:browserSync', function() {
 	browserSync.init({
 		server: {
-			baseDir: 'docs',
+			baseDir: './docs',
 			index: "index.html"
 		},
 	})
 })
+
+// cleanup
+gulp.task('clean:docs', function() {
+	return del.sync('./docs');
+})
+
+
+// Default gulp task to run
+gulp.task('default', ['clean:docs', 'compile:styl', 'compile:pug', 'compile:js', 'compile:assets', 'app:watch', 'app:browserSync']);
