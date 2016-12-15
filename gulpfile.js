@@ -19,9 +19,9 @@ rootPublic = './docs/';
 // Compile CSS with stylus
 gulp.task('compile:styl', function() {
 	return gulp.src([
-		rootStyles + 'includes.styl',
+		rootStyles + 'style.styl',
 		rootPatterns + '**/**/*.styl'
-	])
+	], { base: 'app/styles' })
 	.pipe(concat('app.styl'))
 	.pipe(sourcemaps.init())
 	.pipe(stylus({
@@ -50,9 +50,7 @@ gulp.task('compile:pug', function buildHTML() {
 gulp.task('compile:js', function() {
 	var aframe = gulp.src([
 		rootJS + 'aframe/aframe.min.js',
-		rootJS + 'aframe/kframe.min.js',
-		rootJS + 'aframe/aframe-cubemap-component.js',
-		rootJS + 'fonts/*.typeface.js'
+		rootJS + 'aframe/kframe.min.js'
 		])
 		.pipe(gulp.dest(rootPublic + 'js'));
 	var appjs = gulp.src([
@@ -66,17 +64,6 @@ gulp.task('compile:js', function() {
 // compile images
 gulp.task('compile:assets', function () {
 	gulp.src(rootAssets + '**/*')
-	.pipe(image({
-		pngquant: false,
-		optipng: false,
-		zopflipng: false,
-		jpegRecompress: false,
-		jpegoptim: false,
-		mozjpeg: false,
-		gifsicle: false,
-		svgo: false,
-		concurrent: 10
-	}))
 	.pipe(gulp.dest(rootPublic));
 });
 
@@ -92,7 +79,8 @@ gulp.task('app:browserSync', function() {
 	browserSync.init({
 		server: {
 			baseDir: './docs',
-			index: "index.html"
+			index: "index.html",
+			ghostMode: false
 		},
 	})
 })

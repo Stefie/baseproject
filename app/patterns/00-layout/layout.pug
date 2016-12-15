@@ -1,0 +1,21 @@
+doctype html
+html(lang="en")
+	head
+		include includes/htmlHeader.pug
+
+		body
+			div(class="page-wrapper")
+				nav(id="menu", class="page-nav")
+				main(class="page-content")
+					block mainContent
+						header(id="headline")
+							h1 Headline
+						section(id="content")
+							p content
+
+			block footer
+				include /patterns/03-organisms/footer/footer.pug
+
+			block footerScripts
+
+			script(src='./js/app.js')
