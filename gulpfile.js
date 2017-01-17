@@ -49,8 +49,7 @@ gulp.task('compile:pug', function buildHTML() {
 // Compile Javascript
 gulp.task('compile:js', function() {
 	var aframe = gulp.src([
-		rootJS + 'aframe/aframe.min.js',
-		rootJS + 'aframe/kframe.min.js'
+		rootJS + 'aframe/aframe.min.js'
 		])
 		.pipe(gulp.dest(rootPublic + 'js'));
 	var appjs = gulp.src([
